@@ -47,8 +47,8 @@ public class UsuarioControllerTest {
     public void init(){
         Usuario usuario = new Usuario();
         usuario.setId(9L);
-        usuario.setNome("caieleal");
-        usuario.setEmail("caieleals@gmail.com");
+        usuario.setNome("teste");
+        usuario.setEmail("testando@teste.com");
         usuario.setDataNascimento(LocalDate.of(1996,05,15));
         when(mockRepository.findById(9L)).thenReturn(Optional.of(usuario));
     }
@@ -60,8 +60,8 @@ public class UsuarioControllerTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", is(9)))
-                .andExpect(jsonPath("$.nome", is("caieleal")))
-                .andExpect(jsonPath("$.email", is("caieleals@gmail.com")))
+                .andExpect(jsonPath("$.nome", is("teste")))
+                .andExpect(jsonPath("$.email", is("testando@teste.com")))
                 .andExpect(jsonPath("$.dataNascimento", is("1996-05-15")));
 
         verify(mockRepository, times(1)).findById(9L);

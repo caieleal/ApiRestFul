@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,7 +25,7 @@ public class UsuarioController {
         return usuarioRepository.findAll();
     }
     @GetMapping(path = "/usuario/{id}")
-    public ResponseEntity<Usuario> GetBydId(@PathVariable(value = "id") long id){
+    public ResponseEntity<Usuario> GetBydId(@PathVariable(value = "id")@NotNull long id){
         Optional<Usuario> usuario = usuarioRepository.findById(id);
 
         if (usuario.isPresent()){
@@ -43,7 +44,7 @@ public class UsuarioController {
     }
 
     @PutMapping(path = "/usuario/{id}")
-    public ResponseEntity<Usuario> Put(@PathVariable(value = "id")long id, @Valid @RequestBody Usuario usu){
+    public ResponseEntity<Usuario> Put(@PathVariable(value = "id")@NotNull long id, @Valid @RequestBody Usuario usu){
         Optional<Usuario> usuarios = usuarioRepository.findById(id);
         usu.setId(usuarios.get().getId());
 
@@ -52,7 +53,7 @@ public class UsuarioController {
 
         }
     @DeleteMapping(path = "/usuario/{id}")
-    public ResponseEntity<Object> Delete(@PathVariable(value = "id") long id){
+    public ResponseEntity<Object> Delete(@PathVariable(value = "id")@NotNull long id){
         Optional<Usuario> usuario = usuarioRepository.findById(id);
         if (usuario.isPresent()){
             usuarioRepository.delete(usuario.get());
